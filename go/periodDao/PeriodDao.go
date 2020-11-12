@@ -15,10 +15,11 @@ func GetLastRecord() model.Period {
 
 	db := dbUtils.GetDB()
 	rows, err := db.Query("SELECT * FROM period ORDER BY id DESC LIMIT 1")
+	defer rows.Close()
+
 	if err != nil {
 		panic(err)
 	}
-
 	var period model.Period
 	for rows.Next() {
 		period = model.Period{}
@@ -30,7 +31,6 @@ func GetLastRecord() model.Period {
 
 	}
 
-	defer rows.Close()
 	return period
 }
 
@@ -57,6 +57,8 @@ func ListRecord(page int, pageSize int) []model.Period {
 	endIndex := startIndex + pageSize
 
 	rows, err := db.Query("SELECT * FROM period ORDER BY id DESC LIMIT ?,?", startIndex, endIndex)
+	defer rows.Close()
+
 	if err != nil {
 		panic(err)
 	}

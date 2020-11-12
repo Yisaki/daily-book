@@ -35,3 +35,25 @@ func GetLastRecord(w http.ResponseWriter, r *http.Request) {
 	resultB, _ := json.Marshal(result)
 	w.Write(resultB)
 }
+
+func ListRecord(w http.ResponseWriter, r *http.Request) {
+	body, _ := ioutil.ReadAll(r.Body)
+	fmt.Println("ListRecord:", string(body))
+
+	page := model.Page{}
+	json.Unmarshal(body, &page)
+
+	if page.Page < 1 {
+		page.Page = 1
+	}
+
+	if page.PageSize < 1 {
+		page.PageSize = 5
+	}
+
+	periods := periodService.ListRecord(page.Page, page.PageSize)
+
+	result := model.Result{Success: true, Obj: periods}
+	resultB, _ := json.Marshal(result)
+	w.Write(resultB)
+}

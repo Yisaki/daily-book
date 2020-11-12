@@ -13,12 +13,12 @@ func init() {
 func period() {
 	http.HandleFunc("/period/saveRecord", controller.SaveRecord)
 	http.HandleFunc("/period/getLastRecord", controller.GetLastRecord)
+	http.HandleFunc("/period/listRecord", controller.ListRecord)
 }
 
 func main() {
 
 	startServer()
-
 }
 
 func startServer() {

@@ -5,8 +5,8 @@ import (
 	"daily/go/periodDao"
 )
 
-func ListRecord(page int) []model.Period {
-	return periodDao.ListRecord(page, 10)
+func ListRecord(page int, pageSize int) []model.Period {
+	return periodDao.ListRecord(page, pageSize)
 }
 
 func SaveRecord(periodType int) {
