@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Daily from '@/views/daily/Daily'
+import Period from '@/views/period/Period'
+import PeriodList from '@/views/period/PeriodList'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/asd',
-    name: 'Daily',
-    component: Daily
+    path: '/period',
+    name: 'Period',
+    component: Period
+  },
+  {
+    path: '/periodList',
+    name: 'PeriodList',
+    component: PeriodList
   },
 
 ]
