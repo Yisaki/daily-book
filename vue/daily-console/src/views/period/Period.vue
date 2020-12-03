@@ -1,35 +1,35 @@
 <template>
     <div>
         <el-row>
-            <el-button type="primary" plain @click="routeToList"
-                >===</el-button
-            >
+             <el-col :span="4" :offset="19">
+            <el-button type="primary" plain @click="routeToList">===</el-button>
+             </el-col>
         </el-row>
         <!-- 上次记录-->
-        <el-row>
-            <el-col :span="24" class="daily-shadow">
+        <el-row type="flex" justify="center" class="daily-shadow daily-row">
+            <el-col :span="12">
                 <div>
-                    <h1>上次记录时间:</h1>
+                    <div id="last-rec">上次记录时间</div>
                     <div>{{ periodDto.happenTime }}</div>
                     <div><span>类型:</span>{{ typeStr(periodDto.type) }}</div>
                 </div>
             </el-col>
         </el-row>
         <!-- 记录-->
-        <el-row style="margin-top: 20px">
-            <el-col :span="24" class="daily-shadow">
-                <div class="block">
-                    <el-radio-group v-model="periodForm.type" size="medium">
-                        <el-radio-button label="0">开始</el-radio-button>
-                        <el-radio-button label="1">结束</el-radio-button>
-                    </el-radio-group>
-                </div>
+        <el-row type="flex" justify="center" class="daily-shadow daily-row">
+            <el-col :span="12">
+                <el-radio-group v-model="periodForm.type" size="medium">
+                    <el-radio-button :label="0">开始</el-radio-button>
+                    <el-radio-button :label="1">结束</el-radio-button>
+                </el-radio-group>
             </el-col>
         </el-row>
-        <el-row>
-            <el-button type="primary" plain @click="saveRecordReq"
-                >记录</el-button
-            >
+        <el-row type="flex" justify="center" class="daily-shadow daily-row" style="height:200px">
+            
+                <el-button type="primary" plain @click="saveRecordReq" style="width:60%;height:130px"
+                    >记录</el-button
+                >
+           
         </el-row>
     </div>
 </template>
@@ -72,10 +72,9 @@ export default {
                 })
                 .catch((err) => {})
         },
-        routeToList(){
-            this.$router.push('/periodList') 
-        }
-       
+        routeToList() {
+            this.$router.push('/periodList')
+        },
     },
     computed: {
         typeStr() {
@@ -88,4 +87,12 @@ export default {
 </script>
 
 <style>
+#last-rec {
+    color: #909399;
+    font-size: 8px;
+}
+.daily-row {
+    height: 80px;
+    padding-top: 20px;
+}
 </style>

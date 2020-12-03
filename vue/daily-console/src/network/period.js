@@ -14,6 +14,8 @@ export function getLastRecord(){
 }
 
 export function saveRecord(period){
+    console.log(period)
+    console.log(JSON.stringify(period))
     return request({
         url:'/period/saveRecord',
         method:'POST',
