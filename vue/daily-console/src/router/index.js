@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/period',
+    path: '/',
     name: 'Period',
     component: Period
   },

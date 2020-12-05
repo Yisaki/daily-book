@@ -63,7 +63,7 @@ export default {
                 .catch((err) => {})
         },
         routeToSave() {
-            this.$router.push('/period')
+            this.$router.push('/')
         },
 
         deleteRow(index, rows) {
