@@ -2,7 +2,7 @@ package main
 
 import (
 	"daily/go/controller"
-	"log"
+	"daily/go/logger"
 	"net/http"
 )
 
@@ -11,9 +11,9 @@ func init() {
 }
 
 func period() {
-	http.HandleFunc("/period/saveRecord", controller.SaveRecord)
-	http.HandleFunc("/period/getLastRecord", controller.GetLastRecord)
-	http.HandleFunc("/period/listRecord", controller.ListRecord)
+	http.HandleFunc("/api/period/saveRecord", controller.SaveRecord)
+	http.HandleFunc("/api/period/getLastRecord", controller.GetLastRecord)
+	http.HandleFunc("/api/period/listRecord", controller.ListRecord)
 }
 
 func main() {
@@ -22,10 +22,11 @@ func main() {
 }
 
 func startServer() {
+	logger.Info.Println("start server...")
 	err := http.ListenAndServe(":8963", nil)
 	if err != nil {
-		log.Fatal("ERROR: ", err)
-	} else {
-		log.Println("start server...")
+		logger.Error.Println(err)
 	}
+
+
 }

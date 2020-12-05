@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"daily/go/logger"
 	"daily/go/model"
 	"daily/go/periodService"
 	"encoding/json"
@@ -16,7 +17,7 @@ func init() {
 func SaveRecord(w http.ResponseWriter, r *http.Request) {
 
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println("SaveRecord:", string(body))
+	logger.Info.Println("SaveRecord:", string(body))
 	period := model.Period{}
 	json.Unmarshal(body, &period)
 
@@ -28,7 +29,7 @@ func SaveRecord(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetLastRecord(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("GetLastRecord:")
+	logger.Info.Println("GetLastRecord:")
 	period := periodService.GetLastRecord()
 
 	result := model.Result{Success: true, Obj: period}

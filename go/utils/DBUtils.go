@@ -1,8 +1,8 @@
 package utils
 
 import (
+	"daily/go/logger"
 	"database/sql"
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -20,9 +20,9 @@ func GetInstance() *DBUtils {
 		return instance
 	}
 
-	db, err := sql.Open("mysql", "root:123@tcp(127.0.0.1:3306)/mybook")
+	db, err := sql.Open("mysql", "root:123#hxq@tcp(127.0.0.1:3306)/my_daily")
 	if err != nil {
-		fmt.Println(err)
+		logger.Error.Println(err)
 		return nil
 	}
 	db.SetMaxOpenConns(10)
