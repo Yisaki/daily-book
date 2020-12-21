@@ -5,7 +5,6 @@ import (
 	"daily/go/model"
 	"daily/go/periodService"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -39,7 +38,7 @@ func GetLastRecord(w http.ResponseWriter, r *http.Request) {
 
 func ListRecord(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
-	fmt.Println("ListRecord:", string(body))
+	logger.Info.Println("ListRecord:", string(body))
 
 	page := model.Page{}
 	json.Unmarshal(body, &page)
