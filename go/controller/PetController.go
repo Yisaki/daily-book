@@ -3,40 +3,42 @@ package controller
 import (
 	"daily/go/logger"
 	"daily/go/model"
-	"daily/go/periodService"
+	"daily/go/service"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
 )
 
-func init() {
+var petService *service.PetService
 
+func init() {
+	petService=service.NewPetService()
 }
 
-func SaveRecord(w http.ResponseWriter, r *http.Request) {
+func SavePetRecord(w http.ResponseWriter, r *http.Request) {
 
 	body, _ := ioutil.ReadAll(r.Body)
-	logger.Info.Println("SaveRecord:", string(body))
-	period := model.Period{}
-	json.Unmarshal(body, &period)
+	logger.Info.Println("SavePetRecord:", string(body))
+	pet := model.Pet{}
+	json.Unmarshal(body, &pet)
 
-	periodService.SaveRecord(period.Type)
+	petService.SaveRecord(pet)
 
 	result := model.Result{Success: true}
 	resultB, _ := json.Marshal(result)
 	w.Write(resultB)
 }
 
-func GetLastRecord(w http.ResponseWriter, r *http.Request) {
-	logger.Info.Println("GetLastRecord:")
-	period := periodService.GetLastRecord()
+func GetPetLastRecord(w http.ResponseWriter, r *http.Request) {
+	logger.Info.Println("GetPetLastRecord:")
+	pet := petService.GetLastRecord()
 
-	result := model.Result{Success: true, Obj: period}
+	result := model.Result{Success: true, Obj: pet}
 	resultB, _ := json.Marshal(result)
 	w.Write(resultB)
 }
 
-func ListRecord(w http.ResponseWriter, r *http.Request) {
+func ListPetRecord(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	logger.Info.Println("ListRecord:", string(body))
 
@@ -51,9 +53,9 @@ func ListRecord(w http.ResponseWriter, r *http.Request) {
 		page.PageSize = 5
 	}
 
-	periods := periodService.ListRecord(page.Page, page.PageSize)
+	pets := petService.ListRecord(page)
 
-	result := model.Result{Success: true, Obj: periods}
+	result := model.Result{Success: true, Obj: pets}
 	resultB, _ := json.Marshal(result)
 	w.Write(resultB)
 }

@@ -9,6 +9,12 @@ export default new Vuex.Store({
     periodTypeMap:{
       0:'开始',
       1:'结束'
+    },
+    petTypeMap:{
+      0:'拉屎',
+      1:'上药',
+      2:'洗澡',
+      3:'吃营养膏'
     }
   },
   mutations: {

@@ -15,9 +15,11 @@ type PetService struct {
 /**
 构造函数
 */
-func NewPetService() {
-	petService := &PetService{}
+func NewPetService()(petService *PetService) {
+	petService = &PetService{}
 	petService.petDao = dao.NewPetDao()
+
+	return petService
 }
 
 func (petService *PetService) ListRecord(page model.Page) []model.Pet {
