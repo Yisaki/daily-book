@@ -5,6 +5,8 @@ import Period from '@/views/period/Period'
 import PeriodList from '@/views/period/PeriodList'
 
 import Pet from '@/views/pet/Pet'
+import PetList from '@/views/pet/PetList'
+
 
 
 Vue.use(VueRouter)
@@ -25,6 +27,11 @@ const routes = [
     name: 'Pet',
     component: Pet
   },
+  {
+    path: '/petList',
+    name: 'PetList',
+    component: PetList
+  }, 
 
 
 ]

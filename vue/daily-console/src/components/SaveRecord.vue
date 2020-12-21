@@ -2,7 +2,7 @@
     <div>
         <el-row>
             <el-col :span="4" :offset="19">
-                <el-button type="primary" plain>===</el-button>
+                <el-button type="primary" plain @click="routeToList">===</el-button>
             </el-col>
         </el-row>
         <!-- 上次记录-->
@@ -23,7 +23,7 @@
                 <el-radio-group v-model="formDto.type" size="medium">
                     <el-radio-button
                         :key="k"
-                        :label="k"
+                        :label="parseInt(k)"
                         v-for="(v,k) in typeMap"
                         >{{v}}</el-radio-button
                     >
@@ -64,8 +64,8 @@ export default {
         typeFormat(type){
             return this.typeMap[type]
         },
-        routeToList(routeUrl) {
-            this.$router.push(routeUrl)
+        routeToList() {
+            this.$router.push(this.routeUrl)
         },
     },
     created() {
