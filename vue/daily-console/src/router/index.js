@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/period',
     name: 'Period',
     component: Period
   },
