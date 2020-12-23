@@ -12,7 +12,7 @@
                 <div slot="item-text">分类</div>
             </TabBarItem>
         </TabBar>-->
-        <el-menu :default-active="'/period'" mode="horizontal" @select="handleSelect" id="global-nav" router >
+        <el-menu v-if="isLogin()" :default-active="'/period'" mode="horizontal" @select="handleSelect" id="global-nav" router >
           <el-menu-item index="/period">小裴</el-menu-item>
           <el-menu-item index="/pet">小祖</el-menu-item>
         </el-menu>
@@ -28,12 +28,19 @@ export default {
     },
     data() {
       return {
-
+  
       };
     },
     methods: {
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
+      },
+      isLogin(){
+        let isLogin=localStorage.getItem('isLogin')
+        if(isLogin){
+          return true
+        }
+        return false
       }
     }
 }

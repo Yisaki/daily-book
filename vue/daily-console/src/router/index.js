@@ -7,11 +7,18 @@ import PeriodList from '@/views/period/PeriodList'
 import Pet from '@/views/pet/Pet'
 import PetList from '@/views/pet/PetList'
 
+import Index from '@/views/Index'
+
 
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'Index',
+    component: Index
+  },  
   {
     path: '/period',
     name: 'Period',
