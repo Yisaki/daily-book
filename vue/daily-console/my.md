@@ -13,4 +13,24 @@
 5.结果 5天后内存下降至20%
 
 2.2 日志打印导致接口慢
+1.收到业务方反馈接口变慢，也收到接口变慢告警
+2.根据api网关的报错日志，定位到报错节点集中到某两台机器上
+3.对机器进行dump+jstack保留现场后，在api网关上摘除节点，恢复正常
+4.对dump和jstack进行分析，dump没有问题
+5.jstack分析发现有大量线程dubbo provider线程是block
+6.根据block线程里查找等待的锁是由哪个线程持有
+7.发现持有的线程是logback的线程，线程状态为runable，正在使用调用file.getLength方法
+8.ll发现写日志的文件夹挂在一个nas盘上
+9.使用dd命令做性能测试，发现写1g的文件要1min,正常的机器只要0.8秒
+10.联系iaas同事查看发现nas盘正在做坏道修复
+
+2.3 FULLGC问题排查(survivor过小)
+1.每隔几个小时就FULLGC 5 6次 产生告警
+2.通过观察gc日志是老年代被打满 但是没有配置自动打出内存dump 所以只通过fullgc日志目前得不到什么信息
+3.发现fullgc前伴随着好几次younggc
+4.观察younggc的日志 发现eden区清零 survivor区没有增加反而减少 但是older区却增加，fullgc前几次的younggc都是这样，知道把older区打满触发fullgc
+5.有观察了jvm大小只有100多m,xmx设的是1g,所以定位为jvm自己管理的内存太小
+6.增加xms参数解决问题
+
+2.4 FULLGC问题(全表扫描)
 
